@@ -1,0 +1,186 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define loop(i,a,b) for(int i=a; i<b; i++)
+#define endl "\n" 
+#define _HARE_KRISHNA_  signed main(){
+#define _HARE_KRISHNA return 0;}
+#define JAI_SHREE_RAM     ios::sync_with_stdio(false);
+#define gargpb31     cin.tie(NULL);cout.tie(NULL);
+#define in(a,n) loop(i, 0, n) cin >> a[i];
+#define pb push_back
+#define ppb pop_back
+#define mpi map<int, int>
+#define mps map<string, int>
+#define vec   vector<int>  
+#define vec2 vector<vector<int>>
+#define sort(v) sort(v.begin(),v.end());
+#define re(v) reverse(v.begin(),v.end());
+#define inn(n) int n; cin >> n;
+#define str(s) string s; cin >> s;
+#define ff first
+#define ss second
+#define debug(a) for(auto &i : a) cout << i << " "; cout << "\n";
+#define ld long double
+#define prii(x) {cout<<x<<endl;return;}
+#define print(s) cout<<(s)<<endl;
+//o_set.order_of_key(a), return number of elements strictly less than a
+//#include <ext/pb_ds/assoc_container.hpp>
+//#include <ext/pb_ds/tree_policy.hpp>
+//using namespace __gnu_pbds;
+//typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> os;
+//typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update> oms;
+//#define ordered_set tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>
+#define int long long
+
+
+//CODE 
+void sunnygarg(){
+        inn(n) inn(m)
+        vector<vector<char> > graph(n,vector<char>(m));
+
+        loop(i,0,n){
+           loop(j,0,m) cin>>graph[i][j];
+        }
+
+        vector<vector<int> > visited(n,vector<int>(m,0));
+        vector<vector<int> > v(n,vector<int>(m,-1));
+        queue<pair<pair<int,int>,int> > q;
+        loop(i,0,n){
+           loop(j,0,m){
+                if(graph[i][j]=='#') visited[i][j]=1;
+                if(graph[i][j]=='M') {
+                    visited[i][j]=1;
+                    q.push(make_pair(make_pair(i,j),0));
+                }
+            }
+        }
+       
+        while(!q.empty()){
+            int x = q.front().first.first;
+            int y = q.front().first.second;
+            int z = q.front().second;
+            q.pop();
+            v[x][y]=z;
+            int row [] = {-1,0,+1,0};
+            int col[] = {0,+1,0,-1};
+
+            loop(i,0,4){
+                int nrow = x+row[i];
+                int ncol = y+col[i];
+
+                if(nrow>=0 && nrow<n && ncol>=0 && ncol<m){
+                    if(visited[nrow][ncol]==0){
+                        visited[nrow][ncol]=1;
+                        q.push(make_pair(make_pair(nrow, ncol), z+1));
+                    }
+                }
+            }
+        }
+
+        map<pair<int,int>,pair<int,int> > m1;
+       int g=0;
+       int g1=0;
+        loop(i,0,n){
+            loop(j,0,m) {
+                if(graph[i][j]=='#') visited[i][j]=1;
+                else visited[i][j]=0;
+
+                if(graph[i][j]=='A')
+                {   g=i;
+                    g1=j;
+                    q.push(make_pair(make_pair(i, j), 0));
+                    visited[i][j] = 1;
+                }
+            }
+        }
+
+
+
+        while(!q.empty()){
+            int x = q.front().first.first;
+            int y = q.front().first.second;
+            int z = q.front().second;
+            q.pop();
+
+            int row[] = {-1, 0, +1, 0};
+            int col[] = {0, +1, 0, -1};
+
+            loop(i, 0, 4)
+            {
+                int nrow = x + row[i];
+                int ncol = y + col[i];
+
+                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m)
+                {
+                    if (visited[nrow][ncol] == 0)
+                    {
+                        
+                        if(v[nrow][ncol]!=-1){
+                        if(v[nrow][ncol]>(z+1)){
+                        visited[nrow][ncol] = 1;
+                        m1[make_pair(nrow,ncol)]=make_pair(x,y);
+                        q.push(make_pair(make_pair(nrow, ncol), z + 1));
+
+                        }
+                        }
+                        else{
+                            visited[nrow][ncol] = 1;
+                            m1[make_pair(nrow, ncol)] = make_pair(x, y);
+                            q.push(make_pair(make_pair(nrow, ncol), z + 1));
+                        }
+                    }
+                }
+            }
+        }
+
+        loop(i,0,n){
+            loop(j,0,m){
+                if(graph[i][j]=='.' || graph[i][j]=='A'){
+                    if(i==0 || i==n-1 || j==0 || j==m-1){
+                        if(visited[i][j]==1){
+                            print("YES")
+                            vector<char> ans;
+                            int g2=i;
+                            int g3=j;
+                            while(g2!=g || g3!=g1){
+                                pair<int,int> p = m1[make_pair(g2,g3)];
+                                    if(p.second<g3) ans.pb('R');
+                                    if(p.second>g3) ans.pb('L');
+                                    if(p.first>g2) ans.pb('U');
+                                    if(p.first<g2) ans.pb('D'); 
+                                    g2=p.ff;
+                                    g3=p.ss;
+                            }
+
+                            print(ans.size())
+                            re(ans)
+                            loop(i,0,ans.size()) cout<<ans[i];
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        
+        print("NO")
+        
+
+
+        
+
+
+
+}
+//------------------------------------------------------------------------------------------------------------------
+
+
+_HARE_KRISHNA_
+
+    JAI_SHREE_RAM
+    gargpb31
+
+
+      sunnygarg();  
+_HARE_KRISHNA

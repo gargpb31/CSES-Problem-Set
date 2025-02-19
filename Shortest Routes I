@@ -1,0 +1,112 @@
+#include <bits/stdc++.h>
+using namespace std;
+using namespace chrono;
+
+#define loop(i, a, b) for (int i = a; i < b; i++)
+#define endl "\n"
+#define _HARE_KRISHNA_ \
+    signed main()      \
+    {
+#define _HARE_KRISHNA \
+    return 0;         \
+    }
+#define JAI_SHREE_RAM ios::sync_with_stdio(false);
+#define gargpb31   \
+    cin.tie(NULL); \
+    cout.tie(NULL);
+#define in(a, n) loop(i, 0, n) cin >> a[i];
+#define pb push_back
+#define ppb pop_back
+#define mpi map<int, int>
+#define mps map<string, int>
+#define vec vector<int>
+#define vec2 vector<vector<int>>
+#define sort(v) sort(v.begin(), v.end());
+#define re(v) reverse(v.begin(), v.end());
+#define inn(n) \
+    int n;     \
+    cin >> n;
+#define str(s) \
+    string s;  \
+    cin >> s;
+#define ff first
+#define ss second
+#define debug(a)          \
+    for (auto &i : a)     \
+        cout << i << " "; \
+    cout << "\n";
+#define ld long double
+#define prii(x)            \
+    {                      \
+        cout << x << endl; \
+        return;            \
+    }
+#define print(s) cout << (s) << endl;
+#define int long long
+
+// Function for Dijkstra's algorithm
+void sunnygarg()
+{
+    inn(n) inn(m)
+        vector<vector<pair<int, int> > >
+            graph(n + 1);
+    map<pair<int, int>, int> m1;
+    while (m--)
+    {
+        inn(l) inn(r) inn(z) if (m1.find(make_pair(l, r)) == m1.end()) m1[make_pair(l, r)] = z;
+        else m1[make_pair(l, r)] = min(m1[make_pair(l, r)], z);
+    }
+    for (auto it : m1)
+    {
+        graph[it.first.first].push_back(make_pair(it.first.second, it.second));
+    }
+
+    set<pair<int, int> > s;
+    s.insert(make_pair(0, 1));
+    vector<int> ans(n, 1e18);
+    ans[0] = 0;
+
+    while (!s.empty())
+    {
+        auto it = s.begin();
+        int x = (*it).ff;
+        int y = (*it).ss;
+
+        s.erase(it);
+        if(x>ans[y-1]) continue;
+        for (auto it : graph[y])
+        {
+            int nval = it.second + x;
+            if (ans[it.first - 1] > nval)
+            {
+                ans[it.first - 1] = nval;
+                s.insert(make_pair(nval, it.first));
+            }
+        }
+    }
+
+    debug(ans)
+}
+
+_HARE_KRISHNA_
+
+JAI_SHREE_RAM
+gargpb31
+
+   
+    // Redirect input and output to files
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+
+    // // Measure execution time
+    // auto start_time = high_resolution_clock::now();
+
+    // Run the algorithm
+    sunnygarg();
+
+    // // Calculate and print execution time
+    // auto end_time = high_resolution_clock::now();
+    // auto duration = duration_cast<milliseconds>(end_time - start_time);
+    // cout << "Execution Time: " << duration.count() << " ms" << endl;
+
+    _HARE_KRISHNA

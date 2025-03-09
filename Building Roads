@@ -8,7 +8,7 @@ using namespace std;
 #define gargpb31     cin.tie(NULL);cout.tie(NULL); 
 #define in(a,n) loop(i, 0, n) cin >> a[i];
 #define pb push_back
-#define ppb pop_back
+#define ppb pop_back     
 #define mpi map<int, int>
 #define mps map<string, int>
 #define vec   vector<int>  

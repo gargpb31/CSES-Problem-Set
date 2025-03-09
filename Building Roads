@@ -5,7 +5,7 @@ using namespace std;
 #define _HARE_KRISHNA_  signed main(){
 #define _HARE_KRISHNA return 0;}
 #define JAI_SHREE_RAM     ios::sync_with_stdio(false);
-#define gargpb31     cin.tie(NULL);cout.tie(NULL);
+#define gargpb31     cin.tie(NULL);cout.tie(NULL); 
 #define in(a,n) loop(i, 0, n) cin >> a[i];
 #define pb push_back
 #define ppb pop_back
